@@ -1,0 +1,6 @@
+Design Ideas:
+- Use different font style for each quiz
+- Sound effects for wrong and right answer
+
+
+Stretch Goals:
