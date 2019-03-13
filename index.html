@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Nancy's RED Quiz Project </title>
-  </head>
 
-  <body>
-  
-  </body>
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Nancy's RED Quiz Project </title>
+</head>
+
+<body>
+  <main>
+
+    <section id="startScreen">
+      <h1 id="quizStartTitle"> Choose your adventure... </h1>
+
+      <div id="startButtons">
+        <button class="abstract Quiz" value="0"> Abstract Quiz </button>
+        <button class="dev Quiz" value="1"> Dev Quiz </button>
+      </div>
+
+    </section>
+
+    <section id="questionScreen">
+      <div id="scoreTracker">
+        <p> Your current score is: 0 </p>
+      </div>
+
+      <div id="questionHeader">
+        <h1> [Insert Question here]</h1>
+      </div>
+
+      <div id="quizOptions">
+        <button class="btnOption a" value="0"> A </button>
+        <button class="btnOption b" value="1"> B </button>
+        <button class="btnOption c" value="3"> C </button>
+        <button class="btnOption d" value="4"> D </button>
+      </div>
+
+    </section>
+
+    <section id="scoreScreen">
+      <h1> Your score is: </h1>
+      <h2> [Score] </h2>
+      <h3> You pass/fail </h3>
+
+      <button class="restart"> Try again. </button>
+    </section>
+
+  </main>
+
+
+  <script type="text/javascript" src="quiz.js"></script>
+</body>
 
 </html>
