@@ -1,6 +1,13 @@
 Design Ideas:
 - Use different font style for each quiz
 - Sound effects for wrong and right answer
+- add unicorn reward
 
 
 Stretch Goals:
+- Try using jQuery instead?
+- Figure out how to use forEach() and map() to populate
+the options options Buttons?
+// optnBtns.forEach (btn => btn.textContent= );
+
+//answers.map(n => "<button>" + n  + "</button>");
