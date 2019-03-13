@@ -97,3 +97,20 @@ const data = {
         }]
     }]
 }
+
+//Begin with only Start Screen
+document.getElementById("questionScreen").style.display = "none";
+document.getElementById("scoreScreen").style.display = "none";
+
+let numberOfQuizzes = data.quizzes.length;
+let score = 0;
+let currentQuesIndex = 0
+
+//Add click handler to start startButtons
+const quizBtns = document.querySelectorAll(".quiz");
+quizBtns.forEach (btn => btn.addEventListener("click", populate));
+
+function populate(){
+  console.log(this.value);
+
+}
