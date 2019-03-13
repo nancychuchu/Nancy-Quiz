@@ -1,0 +1,35 @@
+body {
+  background-color: #EDEAF0;
+  margin : auto;
+  text-align: center;
+  padding:20px;
+}
+
+h1 {
+  font-family: 'Roboto Condensed', sans-serif, Arial;
+  background-color: #EEF1EF;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+h2 {
+  font-family: 'Anton', sans-serif, Arial;
+}
+
+
+
+button {
+  width: 46%;
+  min-width: 230px;
+  border: .2rem solid #2f4f4f;
+  border-radius: .25rem;
+  margin: .9rem auto;
+  padding: 1rem .5rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 0 #767676;
+  background: #DDD;
+}
