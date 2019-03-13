@@ -104,27 +104,71 @@ document.getElementById("scoreScreen").style.display = "none";
 
 let numberOfQuizzes = data.quizzes.length;
 let score = 0;
-let currentQuesIndex = 0
+let currentQuesIndex = 0;
+let chosenQuiz = "";
+const happySound = new Audio("./audio/Correct-answer.mp3")
+const sadSound = new Audio("./audio/Short-game-show-buzzer-sound.mp3");
 
 //Add click handler to start startButtons
 const quizBtns = document.querySelectorAll(".quiz");
 quizBtns.forEach(btn => btn.addEventListener("click", populate));
 
 function populate() {
+  const numberOfQuestions = data.quizzes[this.value].questions.length;
+  chosenQuiz = this.value;
+
+  //check if quiz is done
+  if (currentQuesIndex === numberOfQuestions) {
+    showScoreScreen();
+  }
+
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("questionScreen").style.display = "block";
 
-  let selectedQuiz = data.quizzes[this.value];
+  let currentQuesIndexOfSelectedQuiz = data.quizzes[chosenQuiz].questions[currentQuesIndex];
   const optnBtns = document.querySelectorAll(".btnOption");
-  const answers = selectedQuiz.questions[currentQuesIndex].answers.content;
-  const numberOfOptions = selectedQuiz.questions[currentQuesIndex].answers.length;
+  const numberOfOptions = currentQuesIndexOfSelectedQuiz.answers.length;
 
-  console.log(answers);
   //populate question
-  document.getElementById("question").textContent = selectedQuiz.questions[currentQuesIndex].question;
+  document.getElementById("question").textContent = currentQuesIndexOfSelectedQuiz.question;
   //populate options buttons
-   for (let i = 0; i<numberOfOptions ; i++){
-     optnBtns[i].textContent=selectedQuiz.questions[currentQuesIndex].answers[i].content;
-   }
+  for (let i = 0; i < numberOfOptions; i++) {
+    optnBtns[i].textContent = currentQuesIndexOfSelectedQuiz.answers[i].content;
+  }
 
+  //add eventListener for each options button
+  optnBtns.forEach(btn => btn.addEventListener("click", pickedMe));
+}
+
+function pickedMe() {
+  //add attributes for correct and wrong answers
+  const chosenOptn = this;
+  console.log(this.classList);
+  //check if true
+  evaluate(chosenOptn)
+  //change page after timeout of 2 seconds
+}
+
+
+function evaluate(btn) {
+  //if chosen button is correct
+  if (data.quizzes[chosenQuiz].questions[currentQuesIndex].answers[btn.value].value) {
+    score++;
+    happySound.play();
+    btn.classList.add("correctHighlight");
+
+  } else {
+    sadSound.play();
+    btn.classList.add("wrongHighlight");
+    // document.querySelector(".right-answer").classList.add("correctHighlight");
+  }
+
+  //if chosen button is incorrect
+
+
+}
+
+function showScoreScreen() {
+  document.getElementById("questionScreen").style.display = "none";
+  document.getElementById("scoreScreen").style.display = "show";
 }

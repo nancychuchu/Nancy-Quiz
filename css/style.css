@@ -33,3 +33,20 @@ button {
   text-shadow: 2px 2px 0 #767676;
   background: #DDD;
 }
+
+
+.correctHighlight {
+  transform: scale(1.05);
+  transition: all 0.5s ease;
+  border-color: #01FF70;
+  box-shadow: 0 0 1rem #01FF70;
+  background: #C4FFA3;
+}
+
+.wrongHighlight {
+  transform: scale(0.95);
+  transition: all 0.5s ease;
+  background: #FF7F7F;
+  border-color: #D81E5B;
+  box-shadow: 0 0 1rem #D81E5B;
+}
