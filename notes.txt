@@ -1,15 +1,15 @@
 Design Ideas:
-- Use different font style for each quiz
+- Use different font style for each quiz?
 - Sound effects for wrong and right answer
 - add unicorn reward
 
 
 Stretch Goals:
-- Try using jQuery instead?
-- Figure out how to use forEach() and map() to populate
-the options options Buttons?
-// optnBtns.forEach (btn => btn.textContent= );
-
-//answers.map(n => "<button>" + n  + "</button>");
+- Create a separate branch to try using jQuery instead?
+- Figure out how to use forEach() and map() to populate the options Buttons
 - have an array of different pass fail messages that get called at random
 - show an animated time bar to show when question will change
+
+
+Questions:
+- Are commit messages supposed to be in past or imperative tense? 
