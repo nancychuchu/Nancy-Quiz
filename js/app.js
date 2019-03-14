@@ -104,6 +104,10 @@ document.getElementById("scoreScreen").style.display = "none";
 document.querySelector(".restart").addEventListener('click', function() {
   location.reload();
 });
+document.querySelector(".reward").addEventListener('click', function() {
+  cornify_add();
+});
+
 
 let numberOfQuizzes = data.quizzes.length;
 let numberOfQuestions = "";
