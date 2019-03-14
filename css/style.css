@@ -20,12 +20,13 @@ h2 {
 
 
 button {
+  outline: none;
   width: 46%;
   min-width: 230px;
   border: .2rem solid #2f4f4f;
   border-radius: .25rem;
-  margin: .9rem auto;
-  padding: 1rem .5rem;
+  margin: 1rem auto;
+  /* padding: 1rem .5rem; */
   text-align: center;
   font-size: 1.25rem;
   font-weight: bold;
@@ -34,19 +35,22 @@ button {
   background: #DDD;
 }
 
+button:hover{
+  outline:none;
+}
 
 .correctHighlight {
   transform: scale(1.05);
   transition: all 0.5s ease;
-  border-color: #01FF70;
-  box-shadow: 0 0 1rem #01FF70;
+  border-color: green;
+  box-shadow: 0 0 1rem green;
   background: #C4FFA3;
 }
 
 .wrongHighlight {
   transform: scale(0.95);
   transition: all 0.5s ease;
-  background: #FF7F7F;
-  border-color: #D81E5B;
-  box-shadow: 0 0 1rem #D81E5B;
+  background: red;
+  border-color: red;
+  box-shadow: 0 0 1rem red;
 }
