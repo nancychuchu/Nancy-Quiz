@@ -60,14 +60,14 @@ button:active {
   transform: translateY(4px);
 }
 
-.btn-info {
+button.quiz{
   background-color: #F0FF17;
   border-color: #F0FF17;
   color: black;
   padding: 20px auto;
 }
 
-.btn-info:hover {
+button.quiz:hover {
   background-color: #E1EF15;
   border-color: #F0FF17;
 }
