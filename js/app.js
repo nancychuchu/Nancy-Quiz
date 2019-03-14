@@ -103,6 +103,7 @@ document.getElementById("questionScreen").style.display = "none";
 document.getElementById("scoreScreen").style.display = "none";
 
 let numberOfQuizzes = data.quizzes.length;
+let numberOfQuestions = "";
 let score = 0;
 let currentQuesIndex = 0;
 let chosenQuiz = "";
@@ -111,19 +112,19 @@ const sadSound = new Audio("./audio/Short-game-show-buzzer-sound.mp3");
 
 //Add click handler to start startButtons
 const quizBtns = document.querySelectorAll(".quiz");
-quizBtns.forEach(btn => btn.addEventListener("click", populate));
+quizBtns.forEach(btn => btn.addEventListener("click", displayQuiz));
 
-function populate() {
-  const numberOfQuestions = data.quizzes[this.value].questions.length;
+function displayQuiz() {
+  numberOfQuestions = data.quizzes[this.value].questions.length;
   chosenQuiz = this.value;
-
-  //check if quiz is done
-  if (currentQuesIndex === numberOfQuestions) {
-    showScoreScreen();
-  }
 
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("questionScreen").style.display = "block";
+
+  populate();
+}
+
+function populate() {
 
   let currentQuesIndexOfSelectedQuiz = data.quizzes[chosenQuiz].questions[currentQuesIndex];
   const optnBtns = document.querySelectorAll(".btnOption");
@@ -135,7 +136,6 @@ function populate() {
   for (let i = 0; i < numberOfOptions; i++) {
     optnBtns[i].textContent = currentQuesIndexOfSelectedQuiz.answers[i].content;
   }
-
   //add eventListener for each options button
   optnBtns.forEach(btn => btn.addEventListener("click", pickedMe));
 }
@@ -145,8 +145,19 @@ function pickedMe() {
   const chosenOptn = this;
   console.log(this.classList);
   //check if true
-  evaluate(chosenOptn)
+  evaluate(chosenOptn);
+  showCurrentScore();
+
   //change page after timeout of 2 seconds
+  setTimeout(function() {
+    currentQuesIndex++;
+    if (currentQuesIndex == numberOfQuestions) {
+      showScoreScreen();
+    } else {
+      populate();
+    }
+
+  }, 1000);
 }
 
 
@@ -155,11 +166,11 @@ function evaluate(btn) {
   if (data.quizzes[chosenQuiz].questions[currentQuesIndex].answers[btn.value].value) {
     score++;
     happySound.play();
-    btn.classList.add("correctHighlight");
+    //btn.classList.add("correctHighlight");
 
   } else {
     sadSound.play();
-    btn.classList.add("wrongHighlight");
+    //btn.classList.add("wrongHighlight");
     // document.querySelector(".right-answer").classList.add("correctHighlight");
   }
 
@@ -168,7 +179,11 @@ function evaluate(btn) {
 
 }
 
+function showCurrentScore() {
+  document.getElementById("score").textContent = score;
+}
+
 function showScoreScreen() {
   document.getElementById("questionScreen").style.display = "none";
-  document.getElementById("scoreScreen").style.display = "show";
+  document.getElementById("scoreScreen").style.display = "block";
 }
