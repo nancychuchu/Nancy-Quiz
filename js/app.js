@@ -160,7 +160,7 @@ function pickedMe() {
   //change page after timeout of 2 seconds
   setTimeout(function() {
     currentQuesIndex++;
-    if (currentQuesIndex == numberOfQuestions) {
+    if (currentQuesIndex === numberOfQuestions) {
       showScoreScreen();
     } else {
       document.querySelectorAll(".btnOption").forEach(function(e) {
