@@ -31,12 +31,22 @@ button {
   font-size: 1.25rem;
   font-weight: bold;
   color: #fff;
-  text-shadow: 2px 2px 0 #767676;
+  text-shadow: 2px 1px 0 #767676;
   background: #DDD;
 }
 
 button:hover{
   outline:none;
+}
+
+.btn-info {
+  background-color: #F0FF17;
+  border-color: #F0FF17;
+}
+
+.btn-info:hover {
+  background-color: #E1EF15;
+  border-color: #F0FF17;
 }
 
 .correctHighlight {
