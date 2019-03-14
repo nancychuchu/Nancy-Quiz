@@ -116,7 +116,7 @@ let currentQuesIndex = 0;
 let chosenQuiz = "";
 const happySound = new Audio("./audio/Correct-answer.mp3")
 const sadSound = new Audio("./audio/Short-game-show-buzzer-sound.mp3");
-const failMsgs = ["Did I stutter?!? 👨🏿 ", "At least your dog still loves you 🐶", "Give me your lunch. It's mine now. 🍱", "No GOD Please, NOOO!", "You took a life here today... The life of the party 💀", "Never half-ass two things, whole ass one thing.🍑 - Ron Swanson", "I want you to think long and hard... (That's what she said) 🤣 "]
+const failMsgs = ["Did I stutter?!? 👨🏿 ", "At least your dog still loves you 🐶", "Give me your lunch. It's mine now. 🍱", "No GOD Please, NOOO!😡", "You took a life here today... The life of the party 💀", "Never half-ass two things, whole ass one thing.🍑 - Ron Swanson", "I want you to think long and hard... (That's what she said) 🤣 "]
 const passMsgs = ["🧠 Brains and braun! 💪", "Why waste time say lot of word when one word do trick? 💬 ", "I'm not usually one for speeches... so... Goodbye. 👋", "that'll do pig, that'll do... 🐷", "You worked while they partied. Now you go party while they work!🥳", "Not the hero we need, but the hero we deserve. 🦸", "Jordan Schlansky, is that you!? 🤖 ", "the salt...🧂"]
 
 
@@ -160,7 +160,7 @@ function pickedMe() {
   //change page after timeout of 2 seconds
   setTimeout(function() {
     currentQuesIndex++;
-    if (currentQuesIndex == numberOfQuestions) {
+    if (currentQuesIndex === numberOfQuestions) {
       showScoreScreen();
     } else {
       document.querySelectorAll(".btnOption").forEach(function(e) {
@@ -191,13 +191,13 @@ function showScoreScreen() {
   document.getElementById("scoreScreen").style.display = "block";
 }
 
-function displayScore(){
+function displayScore() {
   document.querySelectorAll(".score").forEach(function(e) {
     e.textContent = score;
   });
-  const resultMsg =  document.getElementById("result");
-  const quoteMsg =  document.getElementById("quote");
+  const resultMsg = document.getElementById("result");
+  const quoteMsg = document.getElementById("quote");
   let randoPassMsg = Math.floor(Math.random() * passMsgs.length);
   let randoFailMsg = Math.floor(Math.random() * failMsgs.length);
-  score > 0.5*numberOfQuestions? (resultMsg.textContent = "PASS", quoteMsg.textContent = passMsgs[randoPassMsg]) : (result.textContent = "FAIL", quoteMsg.textContent = failMsgs[randoFailMsg]);
+  score > 0.5 * numberOfQuestions ? (resultMsg.textContent = "PASS", quoteMsg.textContent = passMsgs[randoPassMsg]) : (result.textContent = "FAIL", quoteMsg.textContent = failMsgs[randoFailMsg]);
 }
