@@ -25,7 +25,7 @@
 
     <section id="questionScreen">
       <div id="scoreTracker">
-        <p> Your current score is: <span id="score">0</span> </p>
+        <p> Your current score is: <span class="score">0</span> </p>
       </div>
 
       <div id="questionHeader">
@@ -33,20 +33,20 @@
       </div>
 
       <div id="quizOptions">
-        <button class="btnOption a" value="0"> A </button>
-        <button class="btnOption b" value="1"> B </button>
-        <button class="btnOption c" value="2"> C </button>
-        <button class="btnOption d" value="3"> D </button>
+        <button class="btnOption" value="0"> A </button>
+        <button class="btnOption" value="1"> B </button>
+        <button class="btnOption" value="2"> C </button>
+        <button class="btnOption" value="3"> D </button>
       </div>
 
     </section>
 
     <section id="scoreScreen">
       <h1> Your score is: </h1>
-      <h2> [Score] </h2>
-      <h3> You pass/fail </h3>
-
-      <button class="restart"> Try again. </button>
+      <h2 class="score"> [Score] </h2>
+      <h3 id="result"> You pass/fail </h3>
+      <p id="quote"> You pass/fail </p>
+      <button class="restart"> Let's do that again! </button>
     </section>
 
   </main>

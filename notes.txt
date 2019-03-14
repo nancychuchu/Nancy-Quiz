@@ -11,3 +11,5 @@ the options options Buttons?
 // optnBtns.forEach (btn => btn.textContent= );
 
 //answers.map(n => "<button>" + n  + "</button>");
+- have an array of different pass fail messages that get called at random
+- show an animated time bar to show when question will change

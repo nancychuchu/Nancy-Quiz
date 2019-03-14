@@ -101,6 +101,9 @@ const data = {
 //Begin with only Start Screen
 document.getElementById("questionScreen").style.display = "none";
 document.getElementById("scoreScreen").style.display = "none";
+document.querySelector(".restart").addEventListener('click', function() {
+  location.reload();
+});
 
 let numberOfQuizzes = data.quizzes.length;
 let numberOfQuestions = "";
@@ -109,6 +112,9 @@ let currentQuesIndex = 0;
 let chosenQuiz = "";
 const happySound = new Audio("./audio/Correct-answer.mp3")
 const sadSound = new Audio("./audio/Short-game-show-buzzer-sound.mp3");
+const failMsgs = ["Did I stutter?!? 👨🏿 ", "At least your dog still loves you 🐶", "Give me your lunch. It's mine now. 🍱", "No GOD Please, NOOO!", "You took a life here today... The life of the party 💀", "Never half-ass two things, whole ass one thing.🍑 - Ron Swanson", "I want you to think long and hard... (That's what she said) 🤣 "]
+const passMsgs = ["🧠 Brains and braun! 💪", "Why waste time say lot of word when one word do trick? 💬 ", "I'm not usually one for speeches... so... Goodbye. 👋", "that'll do pig, that'll do... 🐷", "You worked while they partied. Now you go party while they work!🥳", "Not the hero we need, but the hero we deserve. 🦸", "Jordan Schlansky, is that you!? 🤖 ", "the salt...🧂"]
+
 
 //Add click handler to start startButtons
 const quizBtns = document.querySelectorAll(".quiz");
@@ -125,65 +131,69 @@ function displayQuiz() {
 }
 
 function populate() {
-
   let currentQuesIndexOfSelectedQuiz = data.quizzes[chosenQuiz].questions[currentQuesIndex];
   const optnBtns = document.querySelectorAll(".btnOption");
   const numberOfOptions = currentQuesIndexOfSelectedQuiz.answers.length;
-
   //populate question
   document.getElementById("question").textContent = currentQuesIndexOfSelectedQuiz.question;
   //populate options buttons
   for (let i = 0; i < numberOfOptions; i++) {
     optnBtns[i].textContent = currentQuesIndexOfSelectedQuiz.answers[i].content;
+    currentQuesIndexOfSelectedQuiz.answers[i].value ? optnBtns[i].classList.add("right-answer") : optnBtns[i].classList.add("wrong-answer");
   }
   //add eventListener for each options button
   optnBtns.forEach(btn => btn.addEventListener("click", pickedMe));
 }
 
 function pickedMe() {
-  //add attributes for correct and wrong answers
-  const chosenOptn = this;
-  console.log(this.classList);
-  //check if true
+  let chosenOptn = this;
   evaluate(chosenOptn);
-  showCurrentScore();
-
+  displayScore();
+  //disable buttons
+  document.querySelectorAll(".btnOption").forEach(function(e) {
+    e.disabled = true;
+  })
   //change page after timeout of 2 seconds
   setTimeout(function() {
     currentQuesIndex++;
     if (currentQuesIndex == numberOfQuestions) {
       showScoreScreen();
     } else {
+      document.querySelectorAll(".btnOption").forEach(function(e) {
+        e.disabled = false;
+        e.className = "btnOption";
+      })
       populate();
     }
-
-  }, 1000);
+  }, 2000);
 }
-
 
 function evaluate(btn) {
-  //if chosen button is correct
+  //if selected option is the right answer
   if (data.quizzes[chosenQuiz].questions[currentQuesIndex].answers[btn.value].value) {
     score++;
+    happySound.currentTime = 0;
     happySound.play();
-    //btn.classList.add("correctHighlight");
-
-  } else {
+  } else { //if selected option is the wrong answer
+    sadSound.currentTime = 0;
     sadSound.play();
-    //btn.classList.add("wrongHighlight");
-    // document.querySelector(".right-answer").classList.add("correctHighlight");
+    btn.classList.add("wrongHighlight");
   }
-
-  //if chosen button is incorrect
-
-
-}
-
-function showCurrentScore() {
-  document.getElementById("score").textContent = score;
+  document.querySelector(".right-answer").classList.add("correctHighlight")
 }
 
 function showScoreScreen() {
   document.getElementById("questionScreen").style.display = "none";
   document.getElementById("scoreScreen").style.display = "block";
+}
+
+function displayScore(){
+  document.querySelectorAll(".score").forEach(function(e) {
+    e.textContent = score;
+  });
+  const resultMsg =  document.getElementById("result");
+  const quoteMsg =  document.getElementById("quote");
+  let randoPassMsg = Math.floor(Math.random() * passMsgs.length);
+  let randoFailMsg = Math.floor(Math.random() * failMsgs.length);
+  score > 0.5*numberOfQuestions? (resultMsg.textContent = "PASS", quoteMsg.textContent = passMsgs[randoPassMsg]) : (result.textContent = "FAIL", quoteMsg.textContent = failMsgs[randoFailMsg]);
 }
