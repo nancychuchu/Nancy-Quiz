@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,7 +19,7 @@
     <section id="startScreen">
       <h1 id="quizStartTitle"> Choose your adventure... </h1>
 
-      <div id="startButtons">
+      <div class="btn-container">
         <button class="abstract quiz" value="0"> Abstract Quiz </button>
         <button class="dev quiz" value="1"> Dev Quiz </button>
       </div>
@@ -34,7 +35,7 @@
         <h1 id="question"> [Insert Question here]</h1>
       </div>
 
-      <div id="quizOptions">
+      <div class="btn-container">
         <button class="btnOption" value="0"> A </button>
         <button class="btnOption" value="1"> B </button>
         <button class="btnOption" value="2"> C </button>
@@ -48,14 +49,17 @@
       <h2 class="score"> [Score] </h2>
       <h2 id="result"> You pass/fail </h2>
       <p id="quote"> You pass/fail </p>
-      <button class="restart"> Let's do that again! </button>
-      <button class="reward"> You worked hard. Here's a reward. </button>
+      <div class="btn-container">
+        <button class="restart"> Let's do that again! </button>
+        <button class="reward"> You worked hard. Here's a reward. </button>
+      </div>
+
     </section>
 
   </main>
 
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
-  </body>
+</body>
 
 </html>

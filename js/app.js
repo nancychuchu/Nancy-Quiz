@@ -108,15 +108,14 @@ document.querySelector(".reward").addEventListener('click', function() {
   cornify_add();
 });
 
-
-let numberOfQuizzes = data.quizzes.length;
-let numberOfQuestions = "";
+const numberOfQuizzes = data.quizzes.length;
+let numberOfQuestions = 0;
 let score = 0;
 let currentQuesIndex = 0;
-let chosenQuiz = "";
+let chosenQuiz = null;
 const happySound = new Audio("./audio/Correct-answer.mp3")
 const sadSound = new Audio("./audio/Short-game-show-buzzer-sound.mp3");
-const failMsgs = ["Did I stutter?!? 👨🏿 ", "At least your dog still loves you 🐶", "Give me your lunch. It's mine now. 🍱", "No GOD Please, NOOO!", "You took a life here today... The life of the party 💀", "Never half-ass two things, whole ass one thing.🍑 - Ron Swanson", "I want you to think long and hard... (That's what she said) 🤣 "]
+const failMsgs = ["Did I stutter?!? 👨🏿 ", "At least your dog still loves you 🐶", "Give me your lunch. It's mine now. 🍱", "No GOD Please, NOOO!😡", "You took a life here today... The life of the party 💀", "Never half-ass two things, whole ass one thing.🍑 - Ron Swanson", "I want you to think long and hard... (That's what she said) 🤣 "]
 const passMsgs = ["🧠 Brains and braun! 💪", "Why waste time say lot of word when one word do trick? 💬 ", "I'm not usually one for speeches... so... Goodbye. 👋", "that'll do pig, that'll do... 🐷", "You worked while they partied. Now you go party while they work!🥳", "Not the hero we need, but the hero we deserve. 🦸", "Jordan Schlansky, is that you!? 🤖 ", "the salt...🧂"]
 
 
@@ -127,46 +126,42 @@ quizBtns.forEach(btn => btn.addEventListener("click", displayQuiz));
 function displayQuiz() {
   numberOfQuestions = data.quizzes[this.value].questions.length;
   chosenQuiz = this.value;
-
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("questionScreen").style.display = "block";
-
   populate();
 }
 
 function populate() {
-  let currentQuesIndexOfSelectedQuiz = data.quizzes[chosenQuiz].questions[currentQuesIndex];
+  const currentQuesIndexOfSelectedQuiz = data.quizzes[chosenQuiz].questions[currentQuesIndex];
   const optnBtns = document.querySelectorAll(".btnOption");
   const numberOfOptions = currentQuesIndexOfSelectedQuiz.answers.length;
   //populate question
   document.getElementById("question").textContent = currentQuesIndexOfSelectedQuiz.question;
   //populate options buttons
-  for (let i = 0; i < numberOfOptions; i++) {
-    optnBtns[i].textContent = currentQuesIndexOfSelectedQuiz.answers[i].content;
-    currentQuesIndexOfSelectedQuiz.answers[i].value ? optnBtns[i].classList.add("right-answer") : optnBtns[i].classList.add("wrong-answer");
-  }
+  currentQuesIndexOfSelectedQuiz.answers.forEach((ans, i) => {
+    optnBtns[i].textContent = ans.content
+    ans.value ? optnBtns[i].classList.add("right-answer") : optnBtns[i].classList.add("wrong-answer");
+  });
   //add eventListener for each options button
   optnBtns.forEach(btn => btn.addEventListener("click", pickedMe));
 }
 
 function pickedMe() {
-  let chosenOptn = this;
+  const chosenOptn = this;
   evaluate(chosenOptn);
   displayScore();
   //disable buttons
-  document.querySelectorAll(".btnOption").forEach(function(e) {
-    e.disabled = true;
-  })
+  document.querySelectorAll(".btnOption").forEach(e => e.disabled = true);
   //change page after timeout of 2 seconds
   setTimeout(function() {
     currentQuesIndex++;
     if (currentQuesIndex === numberOfQuestions) {
       showScoreScreen();
     } else {
-      document.querySelectorAll(".btnOption").forEach(function(e) {
+      document.querySelectorAll(".btnOption").forEach(e => {
         e.disabled = false;
         e.className = "btnOption";
-      })
+      });
       populate();
     }
   }, 2000);
@@ -183,7 +178,7 @@ function evaluate(btn) {
     sadSound.play();
     btn.classList.add("wrongHighlight");
   }
-  document.querySelector(".right-answer").classList.add("correctHighlight")
+  document.querySelector(".right-answer").classList.add("correctHighlight");
 }
 
 function showScoreScreen() {
@@ -191,13 +186,19 @@ function showScoreScreen() {
   document.getElementById("scoreScreen").style.display = "block";
 }
 
-function displayScore(){
+function displayScore() {
   document.querySelectorAll(".score").forEach(function(e) {
     e.textContent = score;
   });
-  const resultMsg =  document.getElementById("result");
-  const quoteMsg =  document.getElementById("quote");
-  let randoPassMsg = Math.floor(Math.random() * passMsgs.length);
-  let randoFailMsg = Math.floor(Math.random() * failMsgs.length);
-  score > 0.5*numberOfQuestions? (resultMsg.textContent = "PASS", quoteMsg.textContent = passMsgs[randoPassMsg]) : (result.textContent = "FAIL", quoteMsg.textContent = failMsgs[randoFailMsg]);
+  const resultMsg = document.getElementById("result");
+  const quoteMsg = document.getElementById("quote");
+  const randoPassMsg = Math.floor(Math.random() * passMsgs.length);
+  const randoFailMsg = Math.floor(Math.random() * failMsgs.length);
+  if (score > 0.5 * numberOfQuestions) {
+    resultMsg.textContent = "PASS";
+    quoteMsg.textContent = passMsgs[randoPassMsg];
+  } else {
+    result.textContent = "FAIL";
+    quoteMsg.textContent = failMsgs[randoFailMsg];
+  }
 }
