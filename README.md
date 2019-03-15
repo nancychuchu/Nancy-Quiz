@@ -1,11 +1,14 @@
-# Project Description
 
-THi
+# Project Title
+Nancy's RED adp-entrance
+
+## Project Description
+adp-entrance Quiz project.
 
 ## Getting Started
 
 - clone this repository  
-- run the NancyProject/index.html file in a web browser 
+- run the index.html file in a web browser
 
 ## Acknowledgments
 
