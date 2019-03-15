@@ -101,12 +101,7 @@ const data = {
 //Begin with only Start Screen
 document.getElementById("questionScreen").style.display = "none";
 document.getElementById("scoreScreen").style.display = "none";
-document.querySelector(".restart").addEventListener('click', function() {
-  location.reload();
-});
-document.querySelector(".reward").addEventListener('click', function() {
-  cornify_add();
-});
+
 
 const numberOfQuizzes = data.quizzes.length;
 let numberOfQuestions = 0;
@@ -158,6 +153,7 @@ function pickedMe() {
     if (currentQuesIndex === numberOfQuestions) {
       showScoreScreen();
     } else {
+      //reenable the buttons set class back to btnOption
       document.querySelectorAll(".btnOption").forEach(e => {
         e.disabled = false;
         e.className = "btnOption";
@@ -202,3 +198,11 @@ function displayScore() {
     quoteMsg.textContent = failMsgs[randoFailMsg];
   }
 }
+
+//End screen buttons
+document.querySelector(".restart").addEventListener('click', function() {
+  location.reload();
+});
+document.querySelector(".reward").addEventListener('click', function() {
+  cornify_add();
+});
